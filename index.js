@@ -653,7 +653,7 @@ async function onBuildKitePublicLogRequest(req, res) {
     <html>
     <head>
       <title>${build.message}</title>
-      <link rel="stylesheet" type="text/css" href="/terminal.css" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/buildkite/terminal/v3.1.0/assets/terminal.css" />
     </head>
     <body>
     <h2>${spinnerHtml} ${build.message}</h2>
