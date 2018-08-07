@@ -275,7 +275,7 @@ async function autoMergePullRequests(repoName) {
 
 function pipelineInPublicLogWhitelist(pipeline) {
   const wl = envconst.BUILDKITE_PIPELINE_PUBLIC_LOG_WHITELIST;
-  return wl.split(',').includes(pipeline);
+  return wl.split(',').includes(pipeline) || wl == "*";
 }
 
 async function prRemoveLabel(repoName, prNumber, labelName) {
@@ -642,7 +642,7 @@ async function onBuildKitePublicLogRequest(req, res) {
     }
   }
 
-  const jobs = build.jobs.filter((job) => job.name);
+  const jobs = build.jobs // .filter((job) => job.name);
 
   let spinnerHtml = '';
   if (buildkiteActiveState(build.state)) {
@@ -681,14 +681,14 @@ async function onBuildKitePublicLogRequest(req, res) {
     }
     let jobSpinnerRendered = false;
     for (let job of jobs) {
-      const jobName = job.name.replace(/\[public\]/gi, '').trim();
+      const jobName = job.name.replace(/\[private\]/gi, '').trim();
       const jobNameUri = encodeURI(jobName);
       job.getLogHtmlAsync = promisify(job.getLogHtml);
       const jobHumanTime = buildkiteHumanTimeInfo(job.data);
 
       let jobLog = '<br><i>Build log not available</i><br>';
       let artifacts;
-      if (job.name.includes('[public]')) {
+      if (!job.name.includes('[private]')) {
         const html = await job.getLogHtmlAsync();
         if (html) {
           jobLog = `<div class="term-container">${html}</div>`;
