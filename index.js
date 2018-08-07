@@ -815,7 +815,7 @@ async function main() {
 
     const app = express();
     app.use(webhooks.middleware);
-    app.use(express.static(path.join(__dirname, 'public_html')));
+    app.use(express.static(path.join(__dirname, '../public_html')));
     app.get('/buildkite_public_log', onBuildKitePublicLogRequest);
     app.get('/buildkite_public_artifact', onBuildKitePublicArtifactRequest);
 

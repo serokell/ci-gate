@@ -1,4 +1,4 @@
 {
-  "presets": ["env"],
+  "presets": [["latest-node", {"target": "current"}]],
   "plugins": ["transform-class-properties"]
 }

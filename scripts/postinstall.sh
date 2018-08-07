@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
 
 cd $(dirname $0)/..
 LOCAL_PATH=$PWD
