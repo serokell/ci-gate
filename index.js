@@ -495,6 +495,7 @@ function buildkiteStateStyle(state) {
     assigned: 'gray',
     blocked: 'gray',
     canceled: 'red',
+    broken: 'red',
     failed: 'red',
     passed: 'green',
     running: 'orange',
@@ -517,6 +518,7 @@ function buildkiteHumanTimeInfo(buildData) {
   switch (buildData.state) {
   case 'scheduled':
   case 'waiting':
+  case 'broken':
   case 'assigned':
   {
     assert(typeof buildData.scheduled_at === 'string');
