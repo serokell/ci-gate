@@ -644,7 +644,7 @@ async function onBuildKitePublicLogRequest(req, res) {
     }
   }
 
-  const jobs = build.jobs // .filter((job) => job.name);
+  const jobs = build.jobs.filter((job) => job.name != undefined);
 
   let spinnerHtml = '';
   if (buildkiteActiveState(build.state)) {
